@@ -295,7 +295,7 @@ void loop()
   // 1 is dark
   // A2 is left
   // A0 is right
-
+Serial.println(digitalRead(A0);
   if(digitalRead(A1)==0) {
    if(digitalRead(A2)==0)
    {

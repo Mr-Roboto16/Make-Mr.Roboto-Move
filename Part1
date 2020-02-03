@@ -291,12 +291,12 @@ void loop()
   ui_Middle_Line_Tracker_Data = analogRead(ci_Middle_Line_Tracker);
   ui_Right_Line_Tracker_Data = analogRead(ci_Right_Line_Tracker);*/
 
-  if(ui_Left_Line_Tracker_Data)
+  if(ui_Left_Line_Tracker_Data < (ui_Left_Line_Tracker_Dark - ui_Line_Tracker_Tolerance))
   {
-    ui_Right_Motor_Speed = ui_Right_Motor_Speed +50;
+    ui_Right_Motor_Speed = ui_Right_Motor_Speed +100;
   }
   /* ignoring middle tracker
-  if(ui_Middle_Line_Tracker_Data)
+  if(ui_Middle_Line_Tracker_Data < (ui_Middle_Line_Tracker_Dark - ui_Line_Tracker_Tolerance))
   {
     
   }
@@ -305,9 +305,9 @@ void loop()
     
   }
   */
-  if(ui_Right_Line_Tracker_Data)
+  if(ui_Right_Line_Tracker_Data < (ui_Right_Line_Tracker_Dark - ui_Line_Tracker_Tolerance))
   {
-    ui_Left_Motor_Speed = ui_Left_Motor_Speed +50;
+    ui_Left_Motor_Speed = ui_Left_Motor_Speed +100;
   }
 
        

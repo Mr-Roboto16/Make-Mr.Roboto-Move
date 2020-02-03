@@ -104,7 +104,7 @@ unsigned long ul_Echo_Time;
 unsigned int ui_Left_Line_Tracker_Data;
 unsigned int ui_Middle_Line_Tracker_Data;
 unsigned int ui_Right_Line_Tracker_Data;
-unsigned int ui_Motors_Speed = 1900;        // Default run speed
+unsigned int ui_Motors_Speed = 1700;        // Default run speed
 unsigned int ui_Left_Motor_Speed;
 unsigned int ui_Right_Motor_Speed;
 long l_Left_Motor_Position;

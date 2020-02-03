@@ -293,6 +293,8 @@ void loop()
   
   // 0 is light
   // 1 is dark
+  // A2 is left
+  // A0 is right
 
   if(digitalRead(A1)==0) {
    if(digitalRead(A2)==0)

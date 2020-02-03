@@ -272,8 +272,6 @@ void loop()
       if(bt_3_S_Time_Up)
       {
         readLineTrackers();
-        hello sneha
-        
 
 #ifdef DEBUG_ENCODERS           
         l_Left_Motor_Position = encoder_LeftMotor.getRawPosition();
@@ -289,6 +287,37 @@ void loop()
         ui_Left_Motor_Speed = constrain(ui_Motors_Speed + ui_Left_Motor_Offset, 1600, 2100);
         ui_Right_Motor_Speed = constrain(ui_Motors_Speed + ui_Right_Motor_Offset, 1600, 2100);
 
+  ui_Left_Line_Tracker_Data = analogRead(ci_Left_Line_Tracker);
+  ui_Middle_Line_Tracker_Data = analogRead(ci_Middle_Line_Tracker);
+  ui_Right_Line_Tracker_Data = analogRead(ci_Right_Line_Tracker);
+
+  if(ui_Left_Line_Tracker_Data < (ui_Left_Line_Tracker_Dark - ui_Line_Tracker_Tolerance))
+  {
+    ui_Right_Motor_Speed = ui_Right_Motor_Speed +50;
+  }
+  else
+  { 
+    //what we want
+  }
+  /* ignoring middle tracker
+  if(ui_Middle_Line_Tracker_Data < (ui_Middle_Line_Tracker_Dark - ui_Line_Tracker_Tolerance))
+  {
+    
+  }
+  else
+  { 
+    
+  }
+  */
+  if(ui_Right_Line_Tracker_Data < (ui_Right_Line_Tracker_Dark - ui_Line_Tracker_Tolerance))
+  {
+    ui_Left_Motor_Speed = ui_Left_Motor_Speed +50;
+  }
+  else
+  { 
+    //what we want
+  }
+       
        /***************************************************************************************
          Add line tracking code here. 
          Adjust motor speed according to information from line tracking sensors and 

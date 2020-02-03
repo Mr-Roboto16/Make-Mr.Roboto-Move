@@ -50,7 +50,7 @@ const int ci_Left_Motor = 9;
 const int ci_Arm_Motor = 10;
 const int ci_Grip_Motor = 11;
 const int ci_Motor_Enable_Switch = 12;
-const int ci_Right_Line_Tracker = A0;
+const int ci_Right_Line_Tracker = A0; 
 const int ci_Middle_Line_Tracker = A1;
 const int ci_Left_Line_Tracker = A2;
 const int ci_Light_Sensor = A3;
@@ -290,19 +290,22 @@ void loop()
   ui_Left_Line_Tracker_Data = analogRead(ci_Left_Line_Tracker);
   ui_Middle_Line_Tracker_Data = analogRead(ci_Middle_Line_Tracker);
   ui_Right_Line_Tracker_Data = analogRead(ci_Right_Line_Tracker);
+  
+  // 0 is light
+  // 1 is dark
 
-  if(!(ui_Middle_Line_Tracker_Data < (ui_Middle_Line_Tracker_Dark - ui_Line_Tracker_Tolerance))) {
-   if(ui_Left_Line_Tracker_Data < (ui_Left_Line_Tracker_Dark - ui_Line_Tracker_Tolerance))
+  if(digitalRead(A1)==0) {
+   if(digitalRead(A2)==0)
    {
      ui_Right_Motor_Speed = ui_Right_Motor_Speed +50;
    }
-   if(ui_Right_Line_Tracker_Data < (ui_Right_Line_Tracker_Dark - ui_Line_Tracker_Tolerance))
+   if(digitalRead(A0)==0)
    {
      ui_Left_Motor_Speed = ui_Left_Motor_Speed +50;
    }
   }
   
-  if(ui_Middle_Line_Tracker_Data < (ui_Middle_Line_Tracker_Dark - ui_Line_Tracker_Tolerance) && ui_Left_Line_Tracker_Data < (ui_Left_Line_Tracker_Dark - ui_Line_Tracker_Tolerance) && ui_Right_Line_Tracker_Data < (ui_Right_Line_Tracker_Dark - ui_Line_Tracker_Tolerance)) {
+  if(digitalRead(A1)==1 && digitalRead(A0)==1 && digitalRead(A2)==1) {
    ui_Right_Motor_Speed = 1500;
    ui_Left_Motor_Speed = 1500;
   }

@@ -104,7 +104,7 @@ unsigned long ul_Echo_Time;
 unsigned int ui_Left_Line_Tracker_Data;
 unsigned int ui_Middle_Line_Tracker_Data;
 unsigned int ui_Right_Line_Tracker_Data;
-unsigned int ui_Motors_Speed = 1550;        // Default run speed
+unsigned int ui_Motors_Speed = 1650;        // Default run speed
 unsigned int ui_Left_Motor_Speed;
 unsigned int ui_Right_Motor_Speed;
 long l_Left_Motor_Position;
@@ -297,6 +297,8 @@ void loop()
         // A2 is left
         // A0 is right
         Serial.println(digitalRead(A0);
+        
+        // straight
         if (go_straight==0)
           if(digitalRead(A2)==0) {
            ui_Right_Motor_Speed = ui_Right_Motor_Speed +50;
@@ -310,36 +312,85 @@ void loop()
            ui_Left_Motor_Speed = 1500;
            go_straight=1;
            turn_activation_array[which_turn_occuring]=0;  // activates the upcoming turn
-           which_turn_occuring++;  //increment here or at end of the turn idk yet
+           
           }
         }
         
+        // first turn - left
         if (turn_activation_array[0]==0) {
-        
+          ui_Right_Motor_Speed = 1700;
+          ui_Left_Motor_Speed = 1575;
+          if(digitalRead(A1)==0 || digitalRead(A0)==0 || digitalRead(A2)==0) {
+            go_straight=0;
+            turn_activation_array[which_turn_occuring]=1;
+            which_turn_occuring++;  //increment here or at start of the turn idk yet
+          }
         }
         
+        // second turn - right
         if (turn_activation_array[1]==0) {
-        
+          ui_Right_Motor_Speed = 1575;
+          ui_Left_Motor_Speed =1700;
+          if(digitalRead(A1)==0 || digitalRead(A0)==0 || digitalRead(A2)==0) {
+            go_straight=0;
+            turn_activation_array[which_turn_occuring]=1;
+            which_turn_occuring++;  //increment here or at start of the turn idk yet
+          }
         }
         
+        // third turn - right
         if (turn_activation_array[2]==0) {
-        
+          ui_Right_Motor_Speed = 1575;
+          ui_Left_Motor_Speed =1700;
+          if(digitalRead(A1)==0 || digitalRead(A0)==0 || digitalRead(A2)==0) {
+            go_straight=0;
+            turn_activation_array[which_turn_occuring]=1;
+            which_turn_occuring++;  //increment here or at start of the turn idk yet
+          }
         }
         
+        // fourth turn - left
         if (turn_activation_array[3]==0) {
-        
+          ui_Right_Motor_Speed = 1700;
+          ui_Left_Motor_Speed =1575;
+          if(digitalRead(A1)==0 || digitalRead(A0)==0 || digitalRead(A2)==0) {
+            go_straight=0;
+            turn_activation_array[which_turn_occuring]=1;
+            which_turn_occuring++;  //increment here or at start of the turn idk yet
+          }
         }
         
+        // fifth turn - spin
         if (turn_activation_array[4]==0) {
-        
+          ui_Right_Motor_Speed = 1400;
+          ui_Left_Motor_Speed =1600;
+          if(digitalRead(A1)==0 || digitalRead(A0)==0 || digitalRead(A2)==0) {
+            go_straight=0;
+            turn_activation_array[which_turn_occuring]=1;
+            which_turn_occuring++;  //increment here or at start of the turn idk yet
+          }
         }
         
+        // sixth turn - right
         if (turn_activation_array[5]==0) {
-        
+          ui_Right_Motor_Speed = 1575;
+          ui_Left_Motor_Speed =1700;
+          if(digitalRead(A1)==0 || digitalRead(A0)==0 || digitalRead(A2)==0) {
+            go_straight=0;
+            turn_activation_array[which_turn_occuring]=1;
+            which_turn_occuring++;  //increment here or at start of the turn idk yet
+          }
         }
         
+        // seventh turn - right
         if (turn_activation_array[6]==0) {
-        
+          ui_Right_Motor_Speed = 1575;
+          ui_Left_Motor_Speed =1700;
+          if(digitalRead(A1)==0 || digitalRead(A0)==0 || digitalRead(A2)==0) {
+            go_straight=0;
+            turn_activation_array[which_turn_occuring]=1;
+            which_turn_occuring++;  //increment here or at start of the turn idk yet
+          }
         }
 
        

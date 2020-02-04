@@ -110,6 +110,11 @@ unsigned int ui_Right_Motor_Speed;
 long l_Left_Motor_Position;
 long l_Right_Motor_Position;
 
+// variables i added
+unsigned int go_straight=0;
+turn_activation_array[7]={1,1,1,1,1,1,1};    // change to one to activate
+which_turn_is_occuring=0;
+
 unsigned long ul_3_Second_timer = 0;
 unsigned long ul_Display_Time;
 unsigned long ul_Calibration_Time;
@@ -283,34 +288,59 @@ void loop()
         Serial.println(l_Right_Motor_Position);
 #endif
 
-       // set motor speeds
+        // set motor speeds
         ui_Left_Motor_Speed = constrain(ui_Motors_Speed + ui_Left_Motor_Offset, 1600, 2100);
         ui_Right_Motor_Speed = constrain(ui_Motors_Speed + ui_Right_Motor_Offset, 1600, 2100);
-
-  ui_Left_Line_Tracker_Data = analogRead(ci_Left_Line_Tracker);
-  ui_Middle_Line_Tracker_Data = analogRead(ci_Middle_Line_Tracker);
-  ui_Right_Line_Tracker_Data = analogRead(ci_Right_Line_Tracker);
   
-  // 0 is light
-  // 1 is dark
-  // A2 is left
-  // A0 is right
-Serial.println(digitalRead(A0);
-  if(digitalRead(A1)==0) {
-   if(digitalRead(A2)==0)
-   {
-     ui_Right_Motor_Speed = ui_Right_Motor_Speed +50;
-   }
-   if(digitalRead(A0)==0)
-   {
-     ui_Left_Motor_Speed = ui_Left_Motor_Speed +50;
-   }
-  }
+        // 0 is light
+        // 1 is dark
+        // A2 is left
+        // A0 is right
+        Serial.println(digitalRead(A0);
+        if (go_straight==0)
+          if(digitalRead(A2)==0) {
+           ui_Right_Motor_Speed = ui_Right_Motor_Speed +50;
+          }
+          if(digitalRead(A0)==0) {
+           ui_Left_Motor_Speed = ui_Left_Motor_Speed +50;
+          }
   
-  if(digitalRead(A1)==1 && digitalRead(A0)==1 && digitalRead(A2)==1) {
-   ui_Right_Motor_Speed = 1500;
-   ui_Left_Motor_Speed = 1500;
-  }
+          if(digitalRead(A1)==1 && digitalRead(A0)==1 && digitalRead(A2)==1) {
+           ui_Right_Motor_Speed = 1500;
+           ui_Left_Motor_Speed = 1500;
+           go_straight=1;
+           turn_activation_array[which_turn_occuring]=0;  // activates the upcoming turn
+           which_turn_occuring++;  //increment here or at end of the turn idk yet
+          }
+        }
+        
+        if (turn_activation_array[0]==0) {
+        
+        }
+        
+        if (turn_activation_array[1]==0) {
+        
+        }
+        
+        if (turn_activation_array[2]==0) {
+        
+        }
+        
+        if (turn_activation_array[3]==0) {
+        
+        }
+        
+        if (turn_activation_array[4]==0) {
+        
+        }
+        
+        if (turn_activation_array[5]==0) {
+        
+        }
+        
+        if (turn_activation_array[6]==0) {
+        
+        }
 
        
        /***************************************************************************************

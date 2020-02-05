@@ -112,8 +112,8 @@ long l_Right_Motor_Position;
 
 // variables i added
 unsigned int go_straight=0;
-turn_activation_array[7]={1,1,1,1,1,1,1};    // change to one to activate
-which_turn_is_occuring=0;
+int turn_activation_array[7]={1,1,1,1,1,1,1};    // change to one to activate
+int which_turn_occuring=0;
 
 unsigned long ul_3_Second_timer = 0;
 unsigned long ul_Display_Time;
@@ -299,12 +299,12 @@ void loop()
         Serial.println(digitalRead(A0);
         
         // straight
-        if (go_straight==0)
+        //if (go_straight==0) {
           if(digitalRead(A2)==0) {
-           ui_Right_Motor_Speed = ui_Right_Motor_Speed +50;
+           ui_Right_Motor_Speed = ui_Right_Motor_Speed +100;
           }
           if(digitalRead(A0)==0) {
-           ui_Left_Motor_Speed = ui_Left_Motor_Speed +50;
+           ui_Left_Motor_Speed = ui_Left_Motor_Speed +100;
           }
   
           if(digitalRead(A1)==1 && digitalRead(A0)==1 && digitalRead(A2)==1) {
@@ -314,8 +314,8 @@ void loop()
            turn_activation_array[which_turn_occuring]=0;  // activates the upcoming turn
            
           }
-        }
-        
+        //}
+        /*
         // first turn - left
         if (turn_activation_array[0]==0) {
           ui_Right_Motor_Speed = 1700;
@@ -390,7 +390,7 @@ void loop()
             go_straight=0;
             turn_activation_array[which_turn_occuring]=1;
             which_turn_occuring++;  //increment here or at start of the turn idk yet
-          }
+          }*/
         }
 
        

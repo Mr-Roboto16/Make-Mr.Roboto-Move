@@ -296,7 +296,7 @@ void loop()
         // 1 is dark
         // A2 is left
         // A0 is right
-        Serial.println(digitalRead(A0);
+        Serial.println(digitalRead(A0));
         
         // straight
         //if (go_straight==0) {
@@ -390,8 +390,8 @@ void loop()
             go_straight=0;
             turn_activation_array[which_turn_occuring]=1;
             which_turn_occuring++;  //increment here or at start of the turn idk yet
-          }*/
-        }
+          }
+        }*/
 
        
        /***************************************************************************************

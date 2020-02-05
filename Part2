@@ -318,6 +318,7 @@ void loop()
           {
            ui_Right_Motor_Speed = 1500;
            ui_Left_Motor_Speed = 1500;
+           delay(300); // take out later
            move_number++;
            //go_straight=1;
            //turn_activation_array[0]=0;  // activates the upcoming turn
@@ -328,7 +329,8 @@ void loop()
         if (move_number==1) {
           ui_Right_Motor_Speed = 1650;
           ui_Left_Motor_Speed = 1725;
-          if(ui_Left_Line_Tracker_Data < (ui_Left_Line_Tracker_Dark - ui_Line_Tracker_Tolerance) || ui_Right_Line_Tracker_Data < (ui_Right_Line_Tracker_Dark - ui_Line_Tracker_Tolerance) || ui_Middle_Line_Tracker_Data < (ui_Middle_Line_Tracker_Dark - ui_Line_Tracker_Tolerance)) {
+          if(ui_Middle_Line_Tracker_Data < (ui_Middle_Line_Tracker_Dark - ui_Line_Tracker_Tolerance)) {
+            delay(300);
             move_number++;
           }
         }
@@ -352,6 +354,7 @@ void loop()
           {
            ui_Right_Motor_Speed = 1500;
            ui_Left_Motor_Speed = 1500;
+           delay(300);
            move_number++;
            //go_straight=1;
            //turn_activation_array[0]=0;  // activates the upcoming turn
@@ -361,9 +364,9 @@ void loop()
         /*
         // second turn - right
         if (move_number==3) {
-          ui_Right_Motor_Speed = 1400;
-          ui_Left_Motor_Speed =1900;
-          if(ui_Left_Line_Tracker_Data < (ui_Left_Line_Tracker_Dark - ui_Line_Tracker_Tolerance) || ui_Right_Line_Tracker_Data < (ui_Right_Line_Tracker_Dark - ui_Line_Tracker_Tolerance) || ui_Middle_Line_Tracker_Data < (ui_Middle_Line_Tracker_Dark - ui_Line_Tracker_Tolerance)) {
+          ui_Right_Motor_Speed = 1800;
+          ui_Left_Motor_Speed =1550;
+          if(ui_Middle_Line_Tracker_Data < (ui_Middle_Line_Tracker_Dark - ui_Line_Tracker_Tolerance)) {
             move_number++;
             //turn_activation_array[which_turn_occuring]=1;
             //which_turn_occuring++;  //increment here or at start of the turn idk yet
@@ -377,16 +380,17 @@ void loop()
           ui_Right_Motor_Speed =1575;
           if(ui_Left_Line_Tracker_Data < (ui_Left_Line_Tracker_Dark - ui_Line_Tracker_Tolerance)) 
           {
-           ui_Left_Motor_Speed = ui_Left_Motor_Speed +100;
+           ui_Left_Motor_Speed = ui_Left_Motor_Speed +170;
           }
           if(ui_Right_Line_Tracker_Data < (ui_Right_Line_Tracker_Dark - ui_Line_Tracker_Tolerance)) 
           {
-           ui_Right_Motor_Speed = ui_Right_Motor_Speed +130;
+           ui_Right_Motor_Speed = ui_Right_Motor_Speed +170;
           }
           if(ui_Left_Line_Tracker_Data > (ui_Left_Line_Tracker_Dark - ui_Line_Tracker_Tolerance) && ui_Right_Line_Tracker_Data > (ui_Right_Line_Tracker_Dark - ui_Line_Tracker_Tolerance) && ui_Middle_Line_Tracker_Data > (ui_Middle_Line_Tracker_Dark - ui_Line_Tracker_Tolerance)) 
           {
            ui_Right_Motor_Speed = 1500;
            ui_Left_Motor_Speed = 1500;
+           move_number++;
            //turn_activation_array[which_turn_occuring]=1; 
            //which_turn_occuring++;
            //turn_activation_array[which_turn_occuring]=0;
@@ -397,13 +401,13 @@ void loop()
         
         // third turn - right
         if (move_number==5) {
-          ui_Right_Motor_Speed = 1400;
-          ui_Left_Motor_Speed =100;
-          if(ui_Left_Line_Tracker_Data < (ui_Left_Line_Tracker_Dark - ui_Line_Tracker_Tolerance) || ui_Right_Line_Tracker_Data < (ui_Right_Line_Tracker_Dark - ui_Line_Tracker_Tolerance) || ui_Middle_Line_Tracker_Data < (ui_Middle_Line_Tracker_Dark - ui_Line_Tracker_Tolerance)) {
-            //go_straight=0;
+          ui_Right_Motor_Speed = 1800;
+          ui_Left_Motor_Speed =1550;
+          if(ui_Middle_Line_Tracker_Data < (ui_Middle_Line_Tracker_Dark - ui_Line_Tracker_Tolerance)) {
+            move_number++;
             //turn_activation_array[which_turn_occuring]=1;
             //which_turn_occuring++;  //increment here or at start of the turn idk yet
-            move_number++;
+            //turn_activation_array[which_turn_occuring]=0;
           }
         }
         
@@ -508,13 +512,13 @@ void loop()
         
         // sixth turn - right
         if (move_number==11) {
-          ui_Right_Motor_Speed = 1575;
-          ui_Left_Motor_Speed =1700;
-          if(ui_Left_Line_Tracker_Data < (ui_Left_Line_Tracker_Dark - ui_Line_Tracker_Tolerance) || ui_Right_Line_Tracker_Data < (ui_Right_Line_Tracker_Dark - ui_Line_Tracker_Tolerance) || ui_Middle_Line_Tracker_Data < (ui_Middle_Line_Tracker_Dark - ui_Line_Tracker_Tolerance)) {
-            //go_straight=0;
+          ui_Right_Motor_Speed = 1800;
+          ui_Left_Motor_Speed =1550;
+          if(ui_Middle_Line_Tracker_Data < (ui_Middle_Line_Tracker_Dark - ui_Line_Tracker_Tolerance)) {
+            move_number++;
             //turn_activation_array[which_turn_occuring]=1;
             //which_turn_occuring++;  //increment here or at start of the turn idk yet
-            move_number++;
+            //turn_activation_array[which_turn_occuring]=0;
           }
         }
         
@@ -545,12 +549,13 @@ void loop()
         
         // seventh turn - right
         if (move_number==13) {
-          ui_Right_Motor_Speed = 1575;
-          ui_Left_Motor_Speed =1700;
-          if(ui_Left_Line_Tracker_Data < (ui_Left_Line_Tracker_Dark - ui_Line_Tracker_Tolerance) || ui_Right_Line_Tracker_Data < (ui_Right_Line_Tracker_Dark - ui_Line_Tracker_Tolerance) || ui_Middle_Line_Tracker_Data < (ui_Middle_Line_Tracker_Dark - ui_Line_Tracker_Tolerance)) {
-            go_straight=0;
-            turn_activation_array[which_turn_occuring]=1;
-            which_turn_occuring++;  //increment here or at start of the turn idk yet
+          ui_Right_Motor_Speed = 1800;
+          ui_Left_Motor_Speed =1550;
+          if(ui_Middle_Line_Tracker_Data < (ui_Middle_Line_Tracker_Dark - ui_Line_Tracker_Tolerance)) {
+            move_number++;
+            //turn_activation_array[which_turn_occuring]=1;
+            //which_turn_occuring++;  //increment here or at start of the turn idk yet
+            //turn_activation_array[which_turn_occuring]=0;
           }
         }
         

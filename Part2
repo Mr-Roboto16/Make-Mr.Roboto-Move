@@ -368,6 +368,8 @@ void loop()
           ui_Left_Motor_Speed =1550;
           if(ui_Middle_Line_Tracker_Data < (ui_Middle_Line_Tracker_Dark - ui_Line_Tracker_Tolerance)) {
             move_number++;
+            
+            //I'm confused as to why you did this? Like why wasn't the which_turn_occuring started at the beginning?
             //turn_activation_array[which_turn_occuring]=1;
             //which_turn_occuring++;  //increment here or at start of the turn idk yet
             //turn_activation_array[which_turn_occuring]=0;

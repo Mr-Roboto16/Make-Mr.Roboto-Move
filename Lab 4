@@ -300,7 +300,47 @@ void loop()
         Serial.println(digitalRead(A0));
         
         // straight
-     
+        if (move_number==0) {
+
+        //left light on
+          if(ui_Left_Line_Tracker_Data < (ui_Left_Line_Tracker_Dark - ui_Line_Tracker_Tolerance)) 
+          {
+           ui_Left_Motor_Speed = ui_Left_Motor_Speed +100;
+          }
+
+        //right light on
+          if(ui_Right_Line_Tracker_Data < (ui_Right_Line_Tracker_Dark - ui_Line_Tracker_Tolerance)) 
+          {
+           ui_Right_Motor_Speed = ui_Right_Motor_Speed +100;
+          }
+  
+          if(ui_Left_Line_Tracker_Data > (ui_Left_Line_Tracker_Dark - ui_Line_Tracker_Tolerance) && ui_Right_Line_Tracker_Data > (ui_Right_Line_Tracker_Dark - ui_Line_Tracker_Tolerance) && ui_Middle_Line_Tracker_Data > (ui_Middle_Line_Tracker_Dark - ui_Line_Tracker_Tolerance)) 
+          {
+           ui_Right_Motor_Speed = 1500;
+           ui_Left_Motor_Speed = 1500;
+           move_number++;
+           //turn_activation_array[0]=0;  // activates the upcoming turn
+          }
+        
+         }
+         
+         // straight finding next line
+         if (move_number==1) {
+         
+           ui_Left_Motor_Speed = 1750;
+           ui_Right_Motor_Speed = 1750;
+           
+           if(ui_Left_Line_Tracker_Data < (ui_Left_Line_Tracker_Dark - ui_Line_Tracker_Tolerance) || ui_Right_Line_Tracker_Data < (ui_Right_Line_Tracker_Dark - ui_Line_Tracker_Tolerance) || ui_Middle_Line_Tracker_Data < (ui_Middle_Line_Tracker_Dark - ui_Line_Tracker_Tolerance))
+           {
+             ui_Right_Motor_Speed = 1500;
+             ui_Left_Motor_Speed = 1500;
+             move_number++;
+           }
+         
+         }
+         
+         // straight again
+        if (move_number==2) {
 
         //left light on
           if(ui_Left_Line_Tracker_Data < (ui_Left_Line_Tracker_Dark - ui_Line_Tracker_Tolerance)) 
@@ -319,12 +359,10 @@ void loop()
            ui_Right_Motor_Speed = 1500;
            ui_Left_Motor_Speed = 1500;
            //move_number++;
-           //go_straight=1;
            //turn_activation_array[0]=0;  // activates the upcoming turn
           }
         
-         
-        
+         }
        
      
           

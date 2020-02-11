@@ -116,6 +116,8 @@ long l_Right_Motor_Position;
 //int which_turn_occuring=0;
 int move_number=0;
 int forward_movement_slight_right=0;
+unsigned int rotation_counter;
+unsigned int line_finding_counter;
 
 unsigned long ul_3_Second_timer = 0;
 unsigned long ul_Display_Time;
@@ -168,6 +170,8 @@ void setup() {
   pinMode(ci_Ultrasonic_Data, INPUT);
 
   move_number=0;
+  rotation_counter=0;
+  line_finding_counter=0;
 
   // set up drive motors
   pinMode(ci_Right_Motor, OUTPUT);
@@ -338,7 +342,7 @@ void loop()
          // straight finding next line
          if (move_number==1) {
          
-           ui_Left_Motor_Speed = 1775;
+           ui_Left_Motor_Speed = 1770;
            ui_Right_Motor_Speed = 1750;
            
            if(ui_Left_Line_Tracker_Data < (ui_Left_Line_Tracker_Dark - ui_Line_Tracker_Tolerance) || ui_Right_Line_Tracker_Data < (ui_Right_Line_Tracker_Dark - ui_Line_Tracker_Tolerance) || ui_Middle_Line_Tracker_Data < (ui_Middle_Line_Tracker_Dark - ui_Line_Tracker_Tolerance))
@@ -382,36 +386,38 @@ void loop()
           }
         }
 
-          // moving forward
+          // ultrasonic sensor code
           if (move_number==3) {
-            for (int i=0; i<2000; i++) {
-              ui_Right_Motor_Speed = 1650;
-               ui_Left_Motor_Speed = 1650;
-            }
+            
             move_number++;
           }
 
 
           // rotate
           if (move_number==4) {
-            for (int i=0;i<1000;i++) {
+            
+            if (rotation_counter<1000) {
               ui_Right_Motor_Speed = 1300;
               ui_Left_Motor_Speed = 1700;
+              rotation_counter++;
             }
           }
 
           // relocating line
-          if (move_number==6) {
+          if (move_number==5) {
+            
+            if (line_finding_counter<500) {
             ui_Right_Motor_Speed = 1630;
             ui_Left_Motor_Speed = 1600;
-            forward_movement_slight_right++;
-            if (forward_movement_slight_right>500) {
-              for (int i=0;i<500;i++) {
+            }
+            else if (line_finding_counter<1000) {
                 ui_Right_Motor_Speed = 1600;
                 ui_Left_Motor_Speed = 1630;
-              }
+            }
+            else {
               forward_movement_slight_right=0;
             }
+            line_finding_counter++;
             if(ui_Left_Line_Tracker_Data < (ui_Left_Line_Tracker_Dark - ui_Line_Tracker_Tolerance) || ui_Right_Line_Tracker_Data < (ui_Right_Line_Tracker_Dark - ui_Line_Tracker_Tolerance) || ui_Middle_Line_Tracker_Data < (ui_Middle_Line_Tracker_Dark - ui_Line_Tracker_Tolerance))
            {
              ui_Right_Motor_Speed = 1500;
@@ -421,27 +427,83 @@ void loop()
           }
 
           // straight
-        if (move_number==7) {
+        if (move_number==6) {
 
-        //left light on
-          if(ui_Left_Line_Tracker_Data < (ui_Left_Line_Tracker_Dark - ui_Line_Tracker_Tolerance)) 
+        if(ui_Left_Line_Tracker_Data < (ui_Left_Line_Tracker_Dark - ui_Line_Tracker_Tolerance)) 
           {
-           ui_Left_Motor_Speed = ui_Left_Motor_Speed +100;
+           ui_Left_Motor_Speed = 1700;
+           ui_Right_Motor_Speed = 1500;
           }
 
         //right light on
           if(ui_Right_Line_Tracker_Data < (ui_Right_Line_Tracker_Dark - ui_Line_Tracker_Tolerance)) 
           {
-           ui_Right_Motor_Speed = ui_Right_Motor_Speed +100;
+             ui_Right_Motor_Speed = 1700;
+             ui_Left_Motor_Speed = 1500;
+          }
+
+          if(ui_Left_Line_Tracker_Data < (ui_Left_Line_Tracker_Dark - ui_Line_Tracker_Tolerance) && ui_Right_Line_Tracker_Data < (ui_Right_Line_Tracker_Dark - ui_Line_Tracker_Tolerance) && ui_Middle_Line_Tracker_Data < (ui_Middle_Line_Tracker_Dark - ui_Line_Tracker_Tolerance)) 
+          {
+           ui_Right_Motor_Speed = 1650;
+           ui_Left_Motor_Speed = 1650;
+          
           }
   
           if(ui_Left_Line_Tracker_Data > (ui_Left_Line_Tracker_Dark - ui_Line_Tracker_Tolerance) && ui_Right_Line_Tracker_Data > (ui_Right_Line_Tracker_Dark - ui_Line_Tracker_Tolerance) && ui_Middle_Line_Tracker_Data > (ui_Middle_Line_Tracker_Dark - ui_Line_Tracker_Tolerance)) 
           {
            ui_Right_Motor_Speed = 1500;
            ui_Left_Motor_Speed = 1500;
-           //move_number++;
+           move_number++;
            //turn_activation_array[0]=0;  // activates the upcoming turn
           }
+         }
+
+         // straight over gap
+         if (move_number==7) {
+         
+           ui_Left_Motor_Speed = 1770;
+           ui_Right_Motor_Speed = 1750;
+           
+           if(ui_Left_Line_Tracker_Data < (ui_Left_Line_Tracker_Dark - ui_Line_Tracker_Tolerance) || ui_Right_Line_Tracker_Data < (ui_Right_Line_Tracker_Dark - ui_Line_Tracker_Tolerance) || ui_Middle_Line_Tracker_Data < (ui_Middle_Line_Tracker_Dark - ui_Line_Tracker_Tolerance))
+           {
+             ui_Right_Motor_Speed = 1500;
+             ui_Left_Motor_Speed = 1500;
+             //move_number++;
+           }
+         
+         }
+
+         // back home
+         if (move_number==0) {
+
+         if(ui_Left_Line_Tracker_Data < (ui_Left_Line_Tracker_Dark - ui_Line_Tracker_Tolerance)) 
+          {
+           ui_Left_Motor_Speed = 1700;
+           ui_Right_Motor_Speed = 1500;
+          }
+
+        //right light on
+          if(ui_Right_Line_Tracker_Data < (ui_Right_Line_Tracker_Dark - ui_Line_Tracker_Tolerance)) 
+          {
+             ui_Right_Motor_Speed = 1700;
+             ui_Left_Motor_Speed = 1500;
+          }
+
+          if(ui_Left_Line_Tracker_Data < (ui_Left_Line_Tracker_Dark - ui_Line_Tracker_Tolerance) && ui_Right_Line_Tracker_Data < (ui_Right_Line_Tracker_Dark - ui_Line_Tracker_Tolerance) && ui_Middle_Line_Tracker_Data < (ui_Middle_Line_Tracker_Dark - ui_Line_Tracker_Tolerance)) 
+          {
+           ui_Right_Motor_Speed = 1650;
+           ui_Left_Motor_Speed = 1650;
+          }
+  
+          if(ui_Left_Line_Tracker_Data > (ui_Left_Line_Tracker_Dark - ui_Line_Tracker_Tolerance) && ui_Right_Line_Tracker_Data > (ui_Right_Line_Tracker_Dark - ui_Line_Tracker_Tolerance) && ui_Middle_Line_Tracker_Data > (ui_Middle_Line_Tracker_Dark - ui_Line_Tracker_Tolerance)) 
+          {
+           ui_Right_Motor_Speed = 1500;
+           ui_Left_Motor_Speed = 1500;
+           move_number++;
+           //go_straight=1;
+           //turn_activation_array[0]=0;  // activates the upcoming turn
+          }
+        
          }
        
      
